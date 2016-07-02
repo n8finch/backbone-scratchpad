@@ -12,6 +12,19 @@ define(['backbone', 'views/slides', 'collection/slides', 'router'], function(Bac
 
       App.router = new MainRouter;
       Backbone.history.start();
+    },
+
+    events: {
+      'keyup': 'keyUp'
+    },
+
+    keyUp: function(e) {
+      //37 is left, 39 is right
+      if (e.keycode === 37 || e.keycode === 39) {
+        App.Vent.trigger('changeSlide', {
+          direction: e.keyCode === 39 ? 'next' : 'prev'
+        });
+      }
     }
 
   });
